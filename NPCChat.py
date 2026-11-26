@@ -4,6 +4,7 @@ from tkinter import ttk
 import requests
 import ollama
 
+OLLAMA_MODEL = "llama3.2"
 messages = [
     {"role": "system", "content": "You are a helpful pirate assistant."}
 ]
@@ -11,7 +12,7 @@ messages = [
 def ask(user_text: str, direction: str = "You are a helpful assistant.") -> str:
     messages[0]["content"] = direction
     messages.append({"role": "user", "content": user_text})
-    res = ollama.chat(model="llama3.2", messages=messages)
+    res = ollama.chat(model=OLLAMA_MODEL, messages=messages)
     reply = res["message"]["content"]
     messages.append({"role": "assistant", "content": reply})
     return reply
